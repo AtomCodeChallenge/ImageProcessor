@@ -1,0 +1,10 @@
+source https://api.nuget.org/v3/index.json
+
+nuget SixLabors.ImageSharp
+nuget SixLabors.Fonts
+nuget SixLabors.Core
+nuget SixLabors.ImageSharp.Drawing
+nuget Microsoft.Extensions.Caching.Memory
+nuget Microsoft.Extensions.Configuration
+nuget Microsoft.Extensions.Logging
+nuget Newtonsoft.Json
