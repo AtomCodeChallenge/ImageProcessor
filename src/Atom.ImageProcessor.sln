@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.ImageProcessor.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.ImageProcessor.Api", "Atom.ImageProcessor.Api\Atom.ImageProcessor.Api.csproj", "{34DCC02F-B9CB-44CC-A032-529497E8D401}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Readme", ".Readme", "{A799CC00-36E3-49A8-B67F-E62DD58683E0}"
+	ProjectSection(SolutionItems) = preProject
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

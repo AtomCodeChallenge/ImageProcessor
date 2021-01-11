@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Atom.ImageProcessor.Api.Interfaces;
+using Atom.ImageProcessor.Service.Interfaces;
+using Atom.ImageProcessor.Service.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Atom.ImageProcessor.Controllers
 {
@@ -11,31 +13,55 @@ namespace Atom.ImageProcessor.Controllers
     public class ImageController : ControllerBase
     {
         private readonly ILogger<ImageController> _logger;
-        private readonly string _imageDirectory;
+        private readonly IImageRetriever _imageRetriever;
+        private readonly IImageService _imageService;
 
-        public ImageController(ILogger<ImageController> logger)
+        public ImageController(
+            ILogger<ImageController> logger,
+            IImageRetriever imageRetriever,
+            IImageService imageService)
         {
             _logger = logger;
-            _imageDirectory = $"{AppDomain.CurrentDomain.BaseDirectory}\\Images";
+            _imageRetriever = imageRetriever;
+            _imageService = imageService;
         }
 
         [HttpGet]
-        public string Get()
+        public async Task<IReadOnlyCollection<string>> Get()
         {
-            var fileList = Directory.GetFiles($"{_imageDirectory}");
+            var imageCatalogue = await _imageRetriever.GetImageCatalogue();
 
-            return string.Join($"{Environment.NewLine}", fileList.Select(f => Path.GetFileName(f)));
+            _logger.LogInformation("Retrieved images: [{imageCatalogue}]", imageCatalogue);
+
+            return imageCatalogue;
         }
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult GetImage(string id)
+        public async Task<ActionResult> GetImage(
+            string id,
+            [FromQuery] int height,
+            [FromQuery] int width,
+            [FromQuery] string colour,
+            [FromQuery] string watermark,
+            [FromQuery] string fileType)
         {
-            var fileList = Directory.GetFiles($"{_imageDirectory}");
+            var imageFilePath = await _imageRetriever.GetImageFilePath(id);
 
-            var imageBytes = System.IO.File.ReadAllBytes(fileList.Where(f => Path.GetFileName(f).Equals(id)).First());
+            var imageParameters = new ImageParameters(imageFilePath);
 
-            return File(imageBytes, "image/png");
+            var valid = await _imageService.ValidateParameters(imageParameters);
+
+            _logger.LogInformation("Request for [{id}] is valid: [{valid}]", id, valid);
+
+            if(valid)
+            {
+                var imageBytes = await _imageService.GetImage(imageParameters);
+
+                return File(imageBytes, imageParameters.FileType);
+            }
+
+            return NotFound();
         }
     }
 }

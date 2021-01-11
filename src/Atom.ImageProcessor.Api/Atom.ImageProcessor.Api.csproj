@@ -11,10 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ContentWithTargetPath
-      Include="Images\*.*"
-      CopyToOutputDirectory="Always"
-      TargetPath="Images\%(Filename)%(Extension)" />
+    <ContentWithTargetPath Include="Images\*.*" CopyToOutputDirectory="Always" TargetPath="Images\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atom.ImageProcessor.Service\Atom.ImageProcessor.Service.csproj" />
   </ItemGroup>
 
 </Project>
