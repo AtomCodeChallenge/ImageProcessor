@@ -29,7 +29,7 @@ namespace Atom.ImageProcessor.Controllers
         [HttpGet]
         public async Task<IReadOnlyCollection<string>> Get()
         {
-            var imageCatalogue = await _imageRetriever.GetImageCatalogue();
+            var imageCatalogue = new string[] { "image_1.png", "image_2.png", "image_3.png" };
 
             _logger.LogInformation("Retrieved images: [{imageCatalogue}]", imageCatalogue);
 

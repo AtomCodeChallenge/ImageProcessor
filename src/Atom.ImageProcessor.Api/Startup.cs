@@ -4,7 +4,6 @@ using Atom.ImageProcessor.Service.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace Atom.ImageProcessor
@@ -14,8 +13,6 @@ namespace Atom.ImageProcessor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IImageSettings, ImageSettings>();
-
-            services.AddSingleton<IImageRetriever, ImageRetriever>();
 
             services.AddImageProcessorServices();
 
@@ -29,14 +26,11 @@ namespace Atom.ImageProcessor
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
 
-                app.UseSwagger();
+            app.UseSwagger();
 
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Atom.ImageProcessor v1"));
-            }
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Atom.ImageProcessor v1"));
 
             app.UseHttpsRedirection();
 
