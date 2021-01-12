@@ -30,7 +30,7 @@ Upon accepting the assignment in Github you'll be generated a repository to work
 
 ### Tasks
 
-Please accept the assignment and complete the following tasks in your repository. There is no minimum or maximum time limit, do what you feel comfortable to do.
+Please complete the following tasks in your repository. There is no minimum or maximum time limit, do what you feel comfortable to do.
 
 We highly encourage you to add comments to your code, if you are unable to do any of the tasks writing comments and sudo is acceptable for us to review.
 
