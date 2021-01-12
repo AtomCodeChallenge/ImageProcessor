@@ -32,13 +32,15 @@ Upon accepting the assignment in Github you'll be generated a repository to work
 
 Please accept the assignment and complete the following tasks in your repository. There is no minimum or maximum time limit, do what you feel comfortable to do.
 
+We highly encourage you to add comments to your code, if you are unable to do any of the tasks writing comments and sudo is acceptable for us to review.
+
 ##### Debugging
 
 Run the API in debug and try to use the `Get` method, an error is returned rather than the desired result. Please fix the error.
 
 ##### Get Images
 
-Using existing resources implement the controllers `Get()` method to return a list of all available images.
+Implement the controllers `Get()` method to return a list of all available images in the image directory.
 
 ##### Process Images
 
@@ -59,5 +61,7 @@ Use the blank unit test project `Atom.ImageProcessor.Tests` to add unit tests co
 ---
 
 ### Submission
+
+If you have any additional remarks about your implementation please add them to the generated pull request (it should be `pull/1`), this will ensure the reviewer sees your remarks.
 
 Once you are happy with your code challenge, please let the person who initially gave you the challenge know. One of our developers will then review the submission (so don't go deleting the repo until you've had feedback!).
